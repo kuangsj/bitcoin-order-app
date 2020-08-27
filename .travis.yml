@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - node
+
+dist: bionic
+sudo: required
+
+notifications:
+  email:
+    recipients:
+      - kuangsj95@gmail.com
+    on_success: always
+    on_failure: always
+branches:
+  only:
+   - development
+before_script:
+  - npm install -g @angular/cli
+  
+script:
+  - ng build --prod --base-href https://kuangsj.github.io/bitcoin-order-app/
+  
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: dist/bitcoin
+  edge: true
+  on:
+    branch: development
